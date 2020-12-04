@@ -232,9 +232,9 @@ class BankHolidaysTest < ActionDispatch::IntegrationTest
   end
 
   context "Check correct behaviour of CookielessAATest" do
-    %w(A B).each do |test_variant|
+    %w[A B].each do |test_variant|
       should "record hit when in variant #{test_variant}" do
-        with_variant CookielessAATest: "#{test_variant}" do
+        with_variant CookielessAATest: test_variant.to_s do
           visit "/bank-holidays"
           assert page.has_xpath?('//script[contains(text(), "CookielessAATestRecorder")]', visible: false)
         end
