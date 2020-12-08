@@ -3,11 +3,8 @@
 
   var $ = global.jQuery
   var GOVUK = global.GOVUK || {}
-  var pii
 
   var CookielessTracker = function (trackingId, fieldsObject) {
-    pii = new GOVUK.pii()
-
     function configureProfile () {
       // https://developers.google.com/analytics/devguides/collection/analyticsjs/command-queue-reference#create
       sendToGa('create', trackingId, fieldsObject)
@@ -24,11 +21,11 @@
     }
 
     function stripTitlePII () {
-      sendToGa('set', 'title', pii.stripPII(document.title))
+      sendToGa('set', 'title', '')
     }
 
     function stripLocationPII () {
-      sendToGa('set', 'location', pii.stripPII(window.location.href))
+      sendToGa('set', 'location', '')
     }
 
     // Support legacy cookieDomain param
@@ -109,3 +106,4 @@
 
   global.GOVUK = GOVUK
 })(window)
+

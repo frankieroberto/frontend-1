@@ -28,11 +28,14 @@
     <% if @meta_section %>
       <meta name="govuk:section" content="<%= @meta_section %>">
     <% end %>
-    <%= cookieless_variant.analytics_meta_tag.html_safe %>
   </head>
 
   <body class="mainstream <%= yield :body_classes %>">
     <div id="wrapper" class="<%= wrapper_class(@publication || @presenter) %>">
+      <% unless cookieless_variant.variant?('Z') %>
+        <meta data-variant="<%= cookieless_variant.variant_name %>" data-module="track-variant">
+      <% end %>
+
       <% if @publication && @publication.in_beta %>
         <%= render 'govuk_publishing_components/components/phase_banner', phase: "beta" %>
       <% end %>
@@ -57,22 +60,5 @@
         <%= render 'govuk_publishing_components/components/feedback' %>
       </div>
     </div>
-
-    <% unless cookieless_variant.variant?('Z') %>
-      <script type="text/javascript">
-        cookielessTracker = new GOVUK.CookielessTracker('UA-26179049-29', {
-          name: 'CookielessTracker',
-          storage: 'none',
-          clientId: '0',
-        });
-
-        cookielessTracker.trackEvent('cookieless', 'hit', {
-          trackerName: 'CookielessTracker',
-          label: '<%= cookieless_variant.variant_name %>',
-          javaEnabled: false,
-          language: ''
-        });
-      </script>
-    <% end %>
   </body>
 </html>
