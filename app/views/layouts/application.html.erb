@@ -60,21 +60,17 @@
 
     <% unless cookieless_variant.variant?('Z') %>
       <script type="text/javascript">
-        ga('create', 'UA-26179049-29', {
-          'name': 'CookielessAATestRecorder',
-          'storage': 'none',
-          'clientId': '0',
+        cookielessTracker = new GOVUK.CookielessTracker('UA-26179049-29', {
+          name: 'CookielessTracker',
+          storage: 'none',
+          clientId: '0',
         });
 
-        ga('CookielessAATestRecorder.send', {
-          hitType: 'event',
-          eventCategory: 'cookieless',
-          eventAction: 'hit',
-          eventLabel: '<%= cookieless_variant.variant_name %>',
-          anonymizeIp: true,
+        cookielessTracker.trackEvent('cookieless', 'hit', {
+          trackerName: 'CookielessTracker',
+          label: '<%= cookieless_variant.variant_name %>',
           javaEnabled: false,
-          language: '',
-          adSenseId: '0'
+          language: ''
         });
       </script>
     <% end %>
