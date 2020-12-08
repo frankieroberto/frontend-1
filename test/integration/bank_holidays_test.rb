@@ -236,7 +236,7 @@ class BankHolidaysTest < ActionDispatch::IntegrationTest
       should "record hit when in variant #{test_variant}" do
         with_variant CookielessAATest: test_variant.to_s do
           visit "/bank-holidays"
-          assert page.has_xpath?('//script[contains(text(), "CookielessAATestRecorder")]', visible: false)
+          assert page.has_xpath?('//script[contains(text(), "CookielessTracker")]', visible: false)
         end
       end
     end
@@ -244,7 +244,7 @@ class BankHolidaysTest < ActionDispatch::IntegrationTest
     should "not record hit when in variant Z" do
       with_variant CookielessAATest: "Z" do
         visit "/bank-holidays"
-        assert page.has_no_xpath?('//script[contains(text(), "CookielessAATestRecorder")]', visible: false)
+        assert page.has_no_xpath?('//script[contains(text(), "CookielessTracker")]', visible: false)
       end
     end
   end
