@@ -11,7 +11,7 @@ window.GOVUK.Modules = window.GOVUK.Modules || {};
         return
       }
 
-      var cookielessTracker = new GOVUK.CookielessTracker('UA-26179049-29', {
+      var cookielessTracker = new GOVUK.Modules.CookielessTracker('UA-26179049-29', {
         name: 'CookielessTracker',
         storage: 'none',
         clientId: '0',

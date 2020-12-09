@@ -1,9 +1,7 @@
-;(function (global) {
-  'use strict'
+window.GOVUK = window.GOVUK || {}
+window.GOVUK.Modules = window.GOVUK.Modules || {};
 
-  var $ = global.jQuery
-  var GOVUK = global.GOVUK || {}
-
+(function (Modules) {
   var CookielessTracker = function (trackingId, fieldsObject) {
     function configureProfile () {
       // https://developers.google.com/analytics/devguides/collection/analyticsjs/command-queue-reference#create
@@ -102,8 +100,6 @@
     }
   }
 
-  GOVUK.CookielessTracker = CookielessTracker
-
-  global.GOVUK = GOVUK
-})(window)
+  Modules.CookielessTracker = CookielessTracker
+})(window.GOVUK.Modules)
 
